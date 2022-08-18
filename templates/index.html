@@ -1,0 +1,39 @@
+{%  extends 'layout/base.html' %}
+{%block title%} Home Page {% endblock%}
+
+
+{%block content%} 
+    <div  class='option'>
+        <label for="refresh-interval-label" class='text-label'>Refresh Interval</label>
+        <select id="refresh-interval">
+            <option value="10" >10s</option>
+            <option value="30">30s</option>
+            <option value="60" selected>1m</option>
+            <option value="180">3m</option>
+            <option value="300">5m</option>
+            <option value="600">10m</option>
+        </select>
+    </div>
+    <div class='option'>
+        <label for="timerange-label" class='text-label'>Time Range</label>
+        <select id="timerange">
+            <option value="30m" data-period = "1m" >Last 30m</option>
+            <option value="1h"  data-period = "1m">Last 1h</option>
+            <option value="4h"  data-period = "5m" selected >Last 4h</option>
+            <option value="6h"  data-period = "15m">Last 6h</option>
+            <option value="12h" data-period = "30m">Last 12h</option>
+            <option value="24h" data-period = "1h">Last 24h</option>
+        </select>
+    </div>
+
+    <div class="flex-container" id="chart-dashboard">
+        {% for chart in charts %}
+            <div class="flex-item">
+                <canvas class='chart-canvas' data-chart-id= {{chart.id}}  ></canvas>
+            </div>
+        {% endfor %}
+ 
+    </div
+    
+
+{% endblock%}

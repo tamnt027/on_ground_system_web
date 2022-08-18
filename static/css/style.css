@@ -1,0 +1,99 @@
+
+
+div.flex-item {
+    padding :0.5% 0.25%;
+    margin: 0% 0% 1% ;
+    box-sizing: border-box;
+}
+
+div.option {
+    margin-bottom: 10px;
+}
+
+div.flex-container{
+    display: flex;
+    flex-wrap:  wrap;
+    /* justify-content: center; */
+    
+}
+
+
+/* For mobile default: */
+
+div.flex-item{
+    /* padding: 5px; */
+    /* margin: 1%; */
+    width: 100%;
+    
+    /* border-style: solid ; */
+}
+
+@media only screen and (min-width: 700px) {
+    /* For tablets: */
+    div.flex-item{
+        
+        /* margin: 1%; */
+        /* padding: 5px; */
+        width: 50%;
+        /* border-style: solid ; */
+
+    }
+}
+
+
+@media only screen and (min-width: 1200px) {
+    /* For tablets: */
+    div.flex-item{
+        
+        /* margin: 1%; */
+        /* padding: 5px; */
+        width: 33%;
+        /* border-style: solid ; */
+
+    }
+}
+
+
+
+@media only screen and (min-width: 1600px) {
+    /* For desktop: */
+    div.flex-item{
+        /* padding: 5px; */
+        /* margin: 5px 5px 5px 5px; */
+        width: 25%;
+
+        /* border-style: solid ; */
+    }
+}
+
+
+
+
+
+body {
+    background-color: white;
+}
+
+
+
+#refresh-interval{
+    width: 150px;
+    height: 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+#timerange{
+    width: 150px;
+    height: 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.text-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px 5px 5px 5px;
+}

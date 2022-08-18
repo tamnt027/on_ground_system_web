@@ -1,0 +1,530 @@
+{
+    "ADD0x20": {
+        "P00": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P01": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P02": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P03": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P04": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P05": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P06": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P07": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P10": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P11": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P12": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P13": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P14": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P15": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P16": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P17": {
+            "pin_mode": 1,
+            "value": 0
+        }
+    },
+    "ADD0x21": {
+        "P00": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P01": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P02": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P03": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P04": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P05": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P06": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P07": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P10": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P11": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P12": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P13": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P14": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P15": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P16": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P17": {
+            "pin_mode": 1,
+            "value": 0
+        }
+    },
+    "ADD0x22": {
+        "P00": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P01": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P02": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P03": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P04": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P05": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P06": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P07": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P10": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P11": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P12": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P13": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P14": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P15": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P16": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P17": {
+            "pin_mode": 1,
+            "value": 0
+        }
+    },
+    "ADD0x23": {
+        "P00": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P01": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P02": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P03": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P04": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P05": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P06": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P07": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P10": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P11": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P12": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P13": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P14": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P15": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P16": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P17": {
+            "pin_mode": 1,
+            "value": 0
+        }
+    },
+    "ADD0x24": {
+        "P00": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P01": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P02": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P03": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P04": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P05": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P06": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P07": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P10": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P11": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P12": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P13": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P14": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P15": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P16": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P17": {
+            "pin_mode": 1,
+            "value": 0
+        }
+    },
+    "ADD0x25": {
+        "P00": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P01": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P02": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P03": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P04": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P05": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P06": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P07": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P10": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P11": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P12": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P13": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P14": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P15": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P16": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P17": {
+            "pin_mode": 1,
+            "value": 0
+        }
+    },
+    "ADD0x26": {
+        "P00": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P01": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P02": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P03": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P04": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P05": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P06": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P07": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P10": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P11": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P12": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P13": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P14": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P15": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P16": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P17": {
+            "pin_mode": 1,
+            "value": 0
+        }
+    },
+    "ADD0x27": {
+        "P00": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P01": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P02": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P03": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P04": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P05": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P06": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P07": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P10": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P11": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P12": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P13": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P14": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P15": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P16": {
+            "pin_mode": 1,
+            "value": 0
+        },
+        "P17": {
+            "pin_mode": 1,
+            "value": 0
+        }
+    }
+}
