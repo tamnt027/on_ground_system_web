@@ -28,8 +28,7 @@
 
     <div class="flex-container" id="chart-dashboard">
         {% for chart in charts %}
-            <div class="flex-item">
-                <canvas class='chart-canvas' data-chart-id= {{chart.id}}  ></canvas>
+            <div class="flex-item chart-canvas"  id= {{ "chart-"|string + chart.id|string}}  data-chart-id={{chart.id}}>
             </div>
         {% endfor %}
  

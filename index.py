@@ -7,6 +7,7 @@ from flask_login import login_user
 from flask import render_template, request, redirect, jsonify
 from admin import *
 from models import Sensor
+from my_enum import ChartYAxis
 import utils
 from influxdb_helper import InfluxDbHelper
 from process import IrrigationProcess
@@ -80,80 +81,78 @@ def get_sensor_data(sensor : Sensor, timerange, period):
     return timestamps, values
 
 
-@app.route("/api/charts/<int:chart_id>/data")
+@app.route("/api/charts/<int:chart_id>")
 def get_chart_data(chart_id):
+    
     chart = utils.get_chart(chart_id)
     if chart is None or chart.active == False:
         return { "status" : "fail",
                  "message" : f"Chart id {chart_id} not exist."} 
     
     try:
-        sensor = chart.sensor
-        secondary_sensor = chart.secondary_sensor
         
         timerange = request.args.get('timerange')
         if timerange is None:
-            timerange = chart.timerange
+            timerange = "2h"
             
         period = request.args.get('period')
         if period is None:
-            period = chart.period
+            period = "1m"
+    
+        data_array = []
+        layout = {}
+        is_has_y2_axis = False
+        for series_display in chart.has_series_displays:
+            sensor = series_display.sensor
+            timestamps, values = get_sensor_data(sensor=sensor, timerange=timerange, period=period)
+            data = {"type" : series_display.typec.value,
+                    "mode" : series_display.mode.value,
+                    "name" : series_display.name,
+                    "yaxis": series_display.yaxis.value,
+                    "x": timestamps,
+                    "y": values}
+            
+            data_array.append(data)
+            
+            if series_display.yaxis == ChartYAxis.yaxis2:
+                is_has_y2_axis = True
+            
+        layout = {
+            "title": chart.title,
 
-        timestamps, values = get_sensor_data(sensor=sensor, timerange=timerange, period=period)
+            "xaxis": {
+                "type": 'date'
+            },
+            "yaxis": {
+                "autorange": True,
+                
+                "type": 'linear'
+            },
+            "yaxis2": {
+                "autorange": True,
+                "overlaying": "y",
+                "side": "right"
+            },
+            "legend": {"orientation": 'h', 
+                       "side": 'top'}
+        }   
+            
         
         response = {
                     "status" : "success",
                     "id": chart.id, 
-                    "sensor" : {
-                        "timestamps" : timestamps,
-                        "values" : values
-                        },
-                    "secondary" : "false",
+                    "data" : data_array,
+                    "layout" : layout,
                     
                 }
                 
-        if secondary_sensor is not None:
-            timestamps_secondary, values_secondary = get_sensor_data(sensor=secondary_sensor, timerange=timerange, period=period)
-
-            response["secondary"] = "true"
-            response["secondary_sensor"] = {
-                        "timestamps" : timestamps_secondary,
-                        "values" : values_secondary
-                        }
-    except:
+    except Exception as e:
         response = { "status" : "fail",
                      "message" : f"Unexpected error when get sensor data"} 
 
     
     return jsonify(response)
 
-@app.route("/api/charts/<int:chart_id>")
-def get_chart(chart_id):
-    chart = utils.get_chart(chart_id)
-    if chart is None or chart.active == False:
-        return { "status" : "fail",
-                 "message" : f"Chart id {chart_id} not exist."} 
-    
-    response = {
-                "status" : "success",
-                "id": chart.id, 
-                "title": chart.title,
-                "background_color0" : chart.background_color0.value,
-                "background_color1" : chart.background_color1.value,
-                "secondary" : "false",
-                "sensor" : {
-                    "id": chart.sensor.id,
-                    "name" : chart.sensor.name,
-                    },
-              }
-    if chart.secondary_sensor is not None:
-        response["secondary"] = "true"
-        response["secondary_sensor"] = {
-            "id": chart.secondary_sensor.id,
-            "name" : chart.secondary_sensor.name
-        }
-    
-    return jsonify(response)
 
 
 

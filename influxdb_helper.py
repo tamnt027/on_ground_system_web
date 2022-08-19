@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, tzinfo
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 
@@ -40,8 +40,8 @@ class InfluxDbHelper:
             for table in tables:
                 for record in table.records:
                     date = record.get_time()
-                
-                    time_stamp.append(date)
+          
+                    time_stamp.append(date.strftime("%Y-%m-%d %H:%M:%S"))
                     values.append(record.get_value())
                     
                     

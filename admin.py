@@ -1,6 +1,6 @@
 from unicodedata import name
 from init import admin, db, login
-from models import ADS, PCF8575, Lora, MasterValve, Mqtt, Pump, Valve, Group, User, UserRole, ScheduleTask, Chart
+from models import ADS, PCF8575, Lora, MasterValve, Mqtt, Pump, SeriesDisplayConfiguration, Valve, Group, User, UserRole, ScheduleTask, Chart, Sensor
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import BaseView, expose, AdminIndexView
 
@@ -68,17 +68,27 @@ class ScheduleTaskView(AuthenticatedAdminModelView):
 
 class ChartView(AuthenticatedAdminModelView):
     pass
+
+class SensorView(AuthenticatedAdminModelView):
+    pass
+
+class SeriesDisplayConfigurationView(AuthenticatedAdminModelView):
+    pass
+
+
     
 admin.add_view(GroupView(Group, db.session, name= 'Groups' ))
 admin.add_view(ValveView(Valve, db.session, name= 'Valves' ))
 admin.add_view(UserView(User, db.session, name= 'Users' ))
-admin.add_view(ADSView(ADS, db.session, name= 'Ads' ))
-admin.add_view(PCF8575View(PCF8575, db.session, name= 'Pcf8575' ))
+# admin.add_view(ADSView(ADS, db.session, name= 'Ads' ))
+# admin.add_view(PCF8575View(PCF8575, db.session, name= 'Pcf8575' ))
 admin.add_view(MqttView(Mqtt, db.session, name= 'Mqtt' ))
 admin.add_view(LoraView(Lora, db.session, name= 'Loras' ))
 admin.add_view(PumpView(Pump, db.session, name= 'Pumps' ))
 admin.add_view(MasterValveView(MasterValve, db.session, name= 'MasterValves' ))
 admin.add_view(ScheduleTaskView(ScheduleTask, db.session, name= 'ScheduleTasks' ))
+admin.add_view(SensorView(Sensor, db.session, name= 'Sensors' ))
+admin.add_view(SeriesDisplayConfigurationView(SeriesDisplayConfiguration, db.session, name= 'Series Display' ))
 admin.add_view(ChartView(Chart, db.session, name= 'Charts' ))
 admin.add_view(LogoutView(name=f'Logout'))
 

@@ -1,12 +1,14 @@
+from email.policy import default
 import random
 import time
 from tokenize import group
+from unicodedata import name
 from sqlalchemy import Column
 from init import db
 from sqlalchemy import Column, Integer, String, Float, Boolean, ForeignKey, DateTime, Enum, UniqueConstraint
 from sqlalchemy.orm import relationship, backref
 from datetime import datetime
-from my_enum import ADSAddress, ADSPin, IOType, MasterValveType, PCF8575Address, PCF8575Pin, PumpType, TaskStatus, TaskType, UserRole
+from my_enum import ADSAddress, ADSPin, ChartMode, ChartType, ChartYAxis, IOType, MasterValveType, PCF8575Address, PCF8575Pin, PumpType, TaskStatus, TaskType, UserRole
 from my_enum import MyColor
 from flask_login import UserMixin
 import hashlib
@@ -212,7 +214,9 @@ class Lora(db.Model):
     def __repr__(self) -> str:
         return f"Lora {self.name} {self.measurement}"
     
-    
+def randomColor():
+    return random.choice(list(MyColor))
+
 class Sensor(db.Model):
     __tablename__ = 'sensors'
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -220,7 +224,9 @@ class Sensor(db.Model):
     lora = relationship("Lora", uselist= False)
     lora_id = Column(Integer, ForeignKey('lora.id'))
     
-
+    def __repr__(self) -> str:
+        return f"Sensor {self.name}"
+    
 class ScheduleTask(db.Model):
     __tablename__ = 'schedule_tasks'
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -286,25 +292,37 @@ class MasterValve(db.Model):
     def turn_off(self) -> None:
         self.pcf8575.set_output_value(False)
         
-def randomColor():
-    return random.choice(list(MyColor))
+        
+class SeriesDisplayConfiguration(db.Model):
+    __tablename__ = 'series_display_configurations'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    typec = Column(Enum(ChartType), default=ChartType.Scatter, nullable = False )
+    mode = Column(Enum(ChartMode), default=ChartMode.Lines, nullable = False )
+    name = Column(String(50), default="")
+    color = Column(Enum(MyColor), default=randomColor , nullable = False )
+    yaxis = Column(Enum(ChartYAxis), default = ChartYAxis.yaxis1, nullable = False )
+     
+    sensor = relationship("Sensor", uselist=False)
+    sensor_id = Column(Integer, ForeignKey("sensors.id"))
+    
+    def __repr__(self) -> str:
+        return f"Series Display {self.name}"
 
         
 class Chart(db.Model):
     __tablename__ = 'charts'
     id = Column(Integer, primary_key=True, autoincrement=True)
     active = Column(Boolean, nullable=False, default= True )
-    title = Column(String(50), nullable=False)
-    timerange = Column(String(50), nullable=False, default="2h")
-    period = Column(String(50), nullable=False, default="1m")
+    title = Column(String(100), default= "", nullable=False)
+    yaxis_title = Column(String(100), default= "", nullable=True)
+    yaxis2_title = Column(String(100), default = "", nullable=True)
     
-    sensor_id = Column(Integer, ForeignKey('sensors.id'), nullable=False)
-    background_color0 = Column(Enum(MyColor), default=randomColor , nullable = False )
-    background_color1 = Column(Enum(MyColor), default=randomColor, nullable = False )
-    secondary_sensor_id = Column(Integer, ForeignKey('sensors.id'), nullable=True)
-    sensor = relationship("Sensor", foreign_keys=[sensor_id],  uselist=False)
-    secondary_sensor = relationship("Sensor", foreign_keys=[secondary_sensor_id],  uselist=False)
+    has_series_displays = db.relationship('SeriesDisplayConfiguration', secondary='charts_series_display_configurations', lazy = True, 
+                                            backref = backref('in_charts', lazy = True))
 
+charts_series_display_configurations = db.Table('charts_series_display_configurations',
+                       Column('chart_id', Integer, ForeignKey(Chart.id), primary_key = True),
+                        Column('series_display_configuration_id', Integer, ForeignKey(SeriesDisplayConfiguration.id), primary_key = True))
 
 import itertools
 def init_database_default():        #initial database with value by default for easy testing
@@ -348,52 +366,66 @@ def init_database_default():        #initial database with value by default for 
         db.session.add(m_master_valve)
         
     for i in range (1, 9):
-        lora_temp0 = Lora(name=f"Lora Dev {i} Temp0", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_temp0')
-        sensor_temp0 = Sensor(name=f"Sensor Dev {i} Temp0" )
+        lora_temp0 = Lora(name=f"Dev {i} Temp0", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_temp0')
+        sensor_temp0 = Sensor(name=f"Dev {i} Temp0" )
         sensor_temp0.lora = lora_temp0
-        db.session.add(sensor_temp0)
+        series_display_temp0 = SeriesDisplayConfiguration(name=f"Dev {i} Temp0")
+        series_display_temp0.sensor = sensor_temp0
+        db.session.add(series_display_temp0)
         
-        lora_temp3 = Lora(name=f"Lora Dev {i} Temp3", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_temp3')
-        sensor_temp3 = Sensor(name=f"Sensor Dev {i} Temp3" )
+        lora_temp3 = Lora(name=f"Dev {i} Temp3", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_temp3')
+        sensor_temp3 = Sensor(name=f"Dev {i} Temp3" )
         sensor_temp3.lora = lora_temp3
-        db.session.add(sensor_temp3)
+        series_display_temp3 = SeriesDisplayConfiguration(name=f"Dev {i} Temp3")
+        series_display_temp3.sensor = sensor_temp3
+        db.session.add(series_display_temp3)
         
-        lora_ec_pore0 = Lora(name=f"Lora Dev {i} EC Pore 0", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_ec_pore0')
-        sensor_ec_pore0 = Sensor(name=f"Sensor Dev {i} EC Pore 0" )
+        lora_ec_pore0 = Lora(name=f"Dev {i} EC Pore 0", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_ec_pore0')
+        sensor_ec_pore0 = Sensor(name=f"Dev {i} EC Pore 0" )
         sensor_ec_pore0.lora = lora_ec_pore0
-        db.session.add(sensor_ec_pore0)
+        series_display_pore0 = SeriesDisplayConfiguration(name=f"Dev {i} EC Pore")
+        series_display_pore0.sensor = sensor_ec_pore0
+        db.session.add(series_display_pore0)
         
-        lora_soil0 = Lora(name=f"Lora Dev {i} Soil 0", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_soil_vwc0')
-        sensor_soil0 = Sensor(name=f"Sensor Dev {i} Soil 0" )
+        lora_soil0 = Lora(name=f"Dev {i} Soil 0", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_soil_vwc0')
+        sensor_soil0 = Sensor(name=f"Dev {i} Soil 0" )
         sensor_soil0.lora = lora_soil0
-        db.session.add(sensor_soil0)
+        series_display_soil0 = SeriesDisplayConfiguration(name=f"Dev {i} Soil0")
+        series_display_soil0.sensor = sensor_soil0
+        db.session.add(series_display_soil0)
         
-        lora_soiless0 = Lora(name=f"Lora Dev {i} Soiless 0", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_soiless_vwc0')
-        sensor_soiless0 = Sensor(name=f"Sensor Dev {i} Soiless 0" )
+        lora_soiless0 = Lora(name=f"Dev {i} Soiless 0", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_soiless_vwc0')
+        sensor_soiless0 = Sensor(name=f"Dev {i} Soiless 0" )
         sensor_soiless0.lora = lora_soiless0
-        db.session.add(sensor_soiless0)      
+        series_display_soiless0 = SeriesDisplayConfiguration(name=f"Dev {i} Soiless0")
+        series_display_soiless0.sensor = sensor_soiless0
+        db.session.add(series_display_soiless0)   
 
-        lora_water_potential = Lora(name=f"Lora Dev {i} Water Potenial", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_water_potential')
-        sensor_water_potential = Sensor(name=f"Sensor Dev {i} Water Potenial" )
+        lora_water_potential = Lora(name=f"Dev {i} Water Potenial", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_water_potential')
+        sensor_water_potential = Sensor(name=f"Dev {i} Water Potential" )
         sensor_water_potential.lora = lora_water_potential
-        db.session.add(sensor_water_potential)   
+        series_display_water_potential = SeriesDisplayConfiguration(name=f"Dev {i} Water Potential")
+        series_display_water_potential.sensor = sensor_water_potential
+        db.session.add(series_display_water_potential)   
         
-        lora_battery = Lora(name=f"Lora Dev {i} Battery", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_water_battery')
-        sensor_lora_battery = Sensor(name=f"Sensor Dev {i} Battery" )
+        lora_battery = Lora(name=f"Dev {i} Battery", device_id= f"000000000000000{i}",measurement= 'device_frmpayload_data_battery')
+        sensor_lora_battery = Sensor(name=f"Dev {i} Battery" )
         sensor_lora_battery.lora = lora_battery
-        db.session.add(sensor_lora_battery)   
+        series_display_battery = SeriesDisplayConfiguration(name=f"Dev {i} Baterry")
+        series_display_battery.sensor = sensor_lora_battery
+        db.session.add(series_display_battery)   
     
-        chart_temp0 = Chart(title=sensor_temp0.name)
-        chart_temp0.sensor = sensor_temp0
+        chart_temp0 = Chart(title=series_display_battery.name)
+        chart_temp0.has_series_displays.append( series_display_battery)
         db.session.add(chart_temp0)
         
-        chart_water_potential = Chart(title=sensor_water_potential.name)
-        chart_water_potential.sensor = sensor_water_potential
-        db.session.add(chart_water_potential)
+        # chart_water_potential = Chart(title=sensor_water_potential.name)
+        # chart_water_potential.sensor = sensor_water_potential
+        # db.session.add(chart_water_potential)
         
-        chart_water_potential = Chart(title=sensor_ec_pore0.name)
-        chart_water_potential.sensor = sensor_ec_pore0
-        db.session.add(chart_water_potential)
+        # chart_water_potential = Chart(title=sensor_ec_pore0.name)
+        # chart_water_potential.sensor = sensor_ec_pore0
+        # db.session.add(chart_water_potential)
     
     
 

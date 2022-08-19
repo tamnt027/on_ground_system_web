@@ -126,3 +126,16 @@ class MyColor(MyEnum):
     Silver	= '#C0C0C0'	
     DarkGray = '#A9A9A9'	
     Black = '#000000'	
+    
+    
+class ChartType(MyEnum):
+    Scatter = 'scatter'
+    
+    
+class ChartMode(MyEnum):
+    Lines = 'lines'
+    
+
+class ChartYAxis(MyEnum):
+    yaxis1 =  'y1'
+    yaxis2 =  'y2'
