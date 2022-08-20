@@ -40,7 +40,7 @@ class InfluxDbHelper:
             for table in tables:
                 for record in table.records:
                     date = record.get_time()
-                    date += timedelta(hours = 7)
+                    date += timedelta(hours = 8)
                     time_stamp.append(date.strftime("%Y-%m-%d %H:%M:%S"))
                     values.append(record.get_value())
                     
