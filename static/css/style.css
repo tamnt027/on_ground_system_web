@@ -17,6 +17,10 @@ div.flex-container{
     
 }
 
+body {
+    background-color: azure;
+}
+
 
 /* For mobile default: */
 
@@ -64,14 +68,6 @@ div.flex-item{
 
         /* border-style: solid ; */
     }
-}
-
-
-
-
-
-body {
-    background-color: white;
 }
 
 
