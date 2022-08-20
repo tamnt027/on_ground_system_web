@@ -136,7 +136,7 @@ def get_chart_data(chart_id):
             "legend": {"orientation": 'h', 
                        "side": 'top'},
             # "paper_bgcolor":"LightSteelBlue",
-            "margin" : dict(l=20, r=20, t=0, b=0)
+            "margin" : dict(l=20, r=20, t=50, b=0)
         }   
             
         
