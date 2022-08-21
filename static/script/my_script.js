@@ -5,7 +5,7 @@ let refresh_interval_handle;
 
 
 const config = {
-    displayModeBar: true, // this is the line that hides the bar.
+    displayModeBar: false, // this is the line that hides the bar.
   };
 
 function refresh_single_chart(chart_canvas) {

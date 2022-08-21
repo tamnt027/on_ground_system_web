@@ -97,3 +97,8 @@ div.flex-item{
     font-weight: bold;
     margin: 5px 5px 5px 5px;
 }
+
+h1 {
+    color: orangered;
+    text-align: center;
+}
