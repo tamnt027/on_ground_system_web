@@ -320,9 +320,16 @@ class Chart(db.Model):
     has_series_displays = db.relationship('SeriesDisplayConfiguration', secondary='charts_series_display_configurations', lazy = True, 
                                             backref = backref('in_charts', lazy = True))
 
+    def __repr__(self) -> str:
+        return f"Chart {self.id} {self.title}"
+
+
 charts_series_display_configurations = db.Table('charts_series_display_configurations',
                        Column('chart_id', Integer, ForeignKey(Chart.id), primary_key = True),
                         Column('series_display_configuration_id', Integer, ForeignKey(SeriesDisplayConfiguration.id), primary_key = True))
+
+
+
 
 import itertools
 def init_database_default():        #initial database with value by default for easy testing
